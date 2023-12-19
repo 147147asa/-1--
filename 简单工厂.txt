@@ -1,0 +1,47 @@
+// 定义一个抽象产品类
+abstract class Product {
+    public abstract void operation();
+}
+
+// 定义具体产品类A
+class ConcreteProductA extends Product {
+    @Override
+    public void operation() {
+        System.out.println("ConcreteProductA operation");
+    }
+}
+
+// 定义具体产品类B
+class ConcreteProductB extends Product {
+    @Override
+    public void operation() {
+        System.out.println("ConcreteProductB operation");
+    }
+}
+
+// 定义简单工厂类
+class SimpleFactory {
+    // 根据传入的参数创建并返回具体产品对象
+    public static Product createProduct(String type) {
+        if (type.equals("A")) {
+            return new ConcreteProductA();
+        } else if (type.equals("B")) {
+            return new ConcreteProductB();
+        } else {
+            throw new IllegalArgumentException("Unknown product type: " + type);
+        }
+    }
+}
+
+// 客户端代码
+public class Client {
+    public static void main(String[] args) {
+        // 使用简单工厂创建产品对象
+        Product productA = SimpleFactory.createProduct("A");
+        Product productB = SimpleFactory.createProduct("B");
+
+        // 调用产品对象的操作方法
+        productA.operation();
+        productB.operation();
+    }
+}
